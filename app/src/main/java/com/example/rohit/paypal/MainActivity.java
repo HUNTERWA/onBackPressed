@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public boolean onKeyDown(int keycode, KeyEvent keyEvent)
+    /*public boolean onKeyDown(int keycode, KeyEvent keyEvent)
     {
         if(keycode==KeyEvent.KEYCODE_BACK)
         {
@@ -132,27 +132,39 @@ public class MainActivity extends AppCompatActivity
         }
             return super.onKeyDown(keycode,keyEvent);
 
+    }*/
+
+    @Override
+    public void onBackPressed()
+    {
+        event();
     }
 
-    public void event()
-    {
-        AlertDialog alertDialog=new AlertDialog.Builder(this)
-                .setMessage("Do you really want to exit ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+     public void event()
+     {
+        AlertDialog.Builder aDB=new AlertDialog.Builder(this);
+        aDB.setMessage("Do you really want to exit?");
+        aDB.setNegativeButton("no", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
 
-                    }
-                }).show();
+            }
+        });
+        aDB.setPositiveButton("yes", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                finish();
+            }
+        });
+        aDB.show();
+     }
+    public void nextActivity(View view)
+    {
+        Intent intent=new Intent(MainActivity.this,CustomClass.class);
+        startActivity(intent);
     }
 }
